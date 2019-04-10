@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+	<definition name="base.definition"
+		template="/WEB-INF/views/index.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header"
+			value="/WEB-INF/views/basefragments/_header.jsp" />
+		<put-attribute name="menu"
+			value="/WEB-INF/views/basefragments/_menu.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/basefragments/_footer.jsp" />
+
+	</definition>
+
+	<!-- home page -->
+	
+	<definition name="homepage" extends="base.definition">
+		<put-attribute name="title" value="Trang chủ" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/bodyfragments/homepage.jsp" />
+	</definition>
+
+	<!-- Employee page -->
+	
+	<definition name="employeePage" extends="base.definition">
+		<put-attribute name="title" value="Quản lý nhân viên" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/bodyfragments/employee/employee.jsp" />
+	</definition>
+
+	<!-- Add Employee page -->
+	
+	<definition name="addEmployeePage" extends="base.definition">
+		<put-attribute name="title" value="Thêm nhân viên" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/bodyfragments/employee/addEmployee.jsp" />
+	</definition>
+
+	<!-- Update Employee page -->
+	
+	<definition name="updateEmployeePage"
+		extends="base.definition">
+		<put-attribute name="title"
+			value="Cập nhật thông tin nhân viên" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/bodyfragments/employee/updateEmployee.jsp" />
+	</definition>
+
+	<!-- material page -->
+	
+	<definition name="materialPage" extends="base.definition">
+		<put-attribute name="title" value="Quản lý vật tư" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/bodyfragments/material/material.jsp" />
+	</definition>
+	
+	<!-- warehouse page -->
+	
+	<definition name="warehousePage" extends="base.definition">
+		<put-attribute name="title" value="Quản lý kho" />
+		<put-attribute name="body" value="/WEB-INF/views/bodyfragments/warehouse/warehouse.jsp"></put-attribute>
+	</definition>
+
+</tiles-definitions>
