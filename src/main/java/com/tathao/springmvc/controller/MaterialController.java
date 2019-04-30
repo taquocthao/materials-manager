@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tathao.springmvc.dao.MaterialDAO;
 import com.tathao.springmvc.model.Material;
+import com.tathao.springmvc.utils.MyAuthorities;
 
 @Controller
 public class MaterialController {
@@ -23,59 +24,47 @@ public class MaterialController {
 	@Autowired
 	private MaterialDAO materialDAO;
 
-	@RequestMapping(value = "/material", method = RequestMethod.GET)
-	public String getViewPage(@RequestParam(name = "page", required = false, defaultValue = "0") int pageID,
+	@RequestMapping(value = "/branch/{branchId}/material", method = RequestMethod.GET)
+	public String getViewPage(
+			@RequestParam(name = "page", required = false, defaultValue = "0") int pageID,
+			@PathVariable("branchId") String branchId ,
 			ModelMap model) {
 
-		Material material = new Material();
-
+		boolean isUser = MyAuthorities.hasRole(MyAuthorities.ROLE_USER);
+		boolean isBranch = MyAuthorities.hasRole(MyAuthorities.ROLE_BRANCH);
+		boolean isCompany = MyAuthorities.hasRole(MyAuthorities.ROLE_COMPANY);
+		
+		// if role is:
+		if(isUser || isBranch) { // USER or CHINHANH
+			// do nothing
+		} else if(isCompany) { // CONGTY (read-only data)
+			model.addAttribute("role", "role_company");
+		}
+		
 		int limit = 11;
 		int start = 0;
 		if (pageID == 0) {
 			// do nothing
 		} else {
-
 			start = (pageID - 1) * limit;
 		}
-
+		
+		Material material = new Material();
+		model.addAttribute("material", material);
+		
 		List<Material> list = materialDAO.getListForEachPage(start, limit);
 		model.addAttribute("materials", list);
-		model.addAttribute("material", material);
 
 		return "materialPage";
 	}
 
-	/*
-	 * @RequestMapping(value="/material", params = "action=add" , method =
-	 * RequestMethod.POST) public String addMaterial(@Valid Material material,
-	 * BindingResult result, RedirectAttributes redirect) {
-	 * 
-	 * if(result.hasErrors()) { // lỗi
-	 * 
-	 * redirect.addFlashAttribute("msgFailure", "Thêm thất bại");
-	 * 
-	 * } else {
-	 * 
-	 * boolean addSuccess = materialDAO.add(material);
-	 * 
-	 * if(addSuccess) {
-	 * 
-	 * redirect.addFlashAttribute("msgSuccess", "Thêm thành công"); } else {
-	 * 
-	 * redirect.addFlashAttribute("msgFailure", "Thêm thất bại");
-	 * 
-	 * }
-	 * 
-	 * }
-	 * 
-	 * System.out.println("da vao day nhe!!");
-	 * 
-	 * return "redirect:/material"; }
-	 */
-
-	@RequestMapping(value = "/material", params = "action", method = RequestMethod.POST)
-	public String actionMaterial(@Valid Material material, BindingResult result, RedirectAttributes redirect,
-			@RequestParam(name = "action") String action) {
+	@RequestMapping(value = "branch/{branchId}/material", params = "action", method = RequestMethod.POST)
+	public String actionMaterial(
+			@Valid Material material, 
+			BindingResult result,
+			RedirectAttributes redirect,
+			@RequestParam(name = "action") String action,
+			@PathVariable(name="branchId") String branchId) {
 
 		if (action.equals("add")) {
 
@@ -100,45 +89,41 @@ public class MaterialController {
 		} else if (action.equals("update")) {
 
 			if (result.hasErrors()) { // lỗi
-
 				redirect.addFlashAttribute("msgFailure", "Cập nhật thất bại");
-
 			} else {
-
 				boolean updateSuccess = materialDAO.update(material);
 
 				if (updateSuccess) {
-
 					redirect.addFlashAttribute("msgSuccess", "Cập nhật thành công");
 				} else {
-
 					redirect.addFlashAttribute("msgFailure", "Cập nhật thất bại");
-
 				}
 			}
 
 		}
 
-		return "redirect:/material";
+		return "redirect:/branch/" + branchId + "/material";
 	}
 
 	// delete material
-	@RequestMapping(value = "/material/{materialID}", params = "action=delete", method = RequestMethod.GET)
-	public String deleteMaterial(@PathVariable(name = "materialID") String id, RedirectAttributes redirect) {
+	@RequestMapping(value = "branch/{branchId}/material/{materialId}", params = "action=delete", method = RequestMethod.GET)
+	public String deleteMaterial(@PathVariable(name = "materialId") String materialId,
+			RedirectAttributes redirect,
+			@PathVariable(name="branchId")String branchId) {
 
-		boolean deleteSuccess = materialDAO.delete(id);
+		boolean deleteSuccess = materialDAO.delete(materialId);
 
 		if (deleteSuccess) {
 
-			redirect.addFlashAttribute("msgSuccess", "Xóa nhân viên thành công");
+			redirect.addFlashAttribute("msgSuccess", "Xóa thành công");
 
 		} else {
 
-			redirect.addFlashAttribute("msgFailure", "Xóa nhân viên thất bại");
+			redirect.addFlashAttribute("msgFailure", "Xóa thất bại");
 
 		}
 
-		return "redirect:/material";
+		return "redirect:/branch/" + branchId + "/material";
 
 	}
 

@@ -70,12 +70,22 @@
 			<version>3.0.8</version>
 		</dependency>
 
+		<!-- Commons DataSources -->
+        <!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>1.4</version>
+        </dependency>
+
+
 		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-		<dependency>
+	<!-- 	<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>6.0.6</version>
-		</dependency>
+		</dependency> -->
+
 
 		<!-- spring jdbc -->
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
@@ -84,15 +94,15 @@
 			<artifactId>spring-jdbc</artifactId>
 			<version>5.1.4.RELEASE</version>
 		</dependency>
-		
-		 <!-- SQLServer JDBC driver (JTDS) -->
-        <!-- http://mvnrepository.com/artifact/net.sourceforge.jtds/jtds -->
-        <dependency>
-            <groupId>net.sourceforge.jtds</groupId>
-            <artifactId>jtds</artifactId>
-            <version>1.3.1</version>
-        </dependency>
 
+		<!-- SQLServer JDBC driver (JTDS) -->
+		<!-- http://mvnrepository.com/artifact/net.sourceforge.jtds/jtds -->
+		<dependency>
+			<groupId>net.sourceforge.jtds</groupId>
+			<artifactId>jtds</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+		
 		<!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
 		<dependency>
 			<groupId>javax.validation</groupId>
@@ -108,6 +118,25 @@
 		</dependency>
 
 
+		<!-- Spring Security -->
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>5.1.4.RELEASE</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>5.1.4.RELEASE</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-taglibs -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>5.1.4.RELEASE</version>
+		</dependency>
 
 
 	</dependencies>

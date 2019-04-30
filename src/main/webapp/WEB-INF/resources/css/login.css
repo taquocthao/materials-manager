@@ -1,0 +1,24 @@
+/* *{
+	border:1px solid;
+} */
+
+body{
+	background-image: url("../image/wallpapers.jpg");
+}
+
+.main{
+	max-width: 400px;
+	background-color: #fff;
+	margin: 10% auto 15% auto;
+	border-radius: 4px;
+	padding: 50px 60px;	
+}
+
+.main .panel-title{
+	text-align:center;
+	margin-bottom: 50px;
+}
+
+p.message{
+	color: red;
+}

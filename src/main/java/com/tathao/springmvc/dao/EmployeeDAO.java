@@ -11,14 +11,13 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import com.tathao.springmvc.mapper.EmployeeMapper;
 import com.tathao.springmvc.model.Employee;
 
 
 
 @Repository
-@Transactional
+
 public class EmployeeDAO extends JdbcDaoSupport{
 	
 	static final String GET_ALL_EMPLOYEES = "usp_EmployeesGetAll";
@@ -34,6 +33,7 @@ public class EmployeeDAO extends JdbcDaoSupport{
 	public EmployeeDAO(DataSource dataSource) {
 		this.setDataSource(dataSource);
 		this.dataSource = dataSource;
+		System.out.println("EmployeeDAO::Contructor() -> using DataSource: " + dataSource);
 	}
 	
 	public Employee getEmployeeById(int id) {

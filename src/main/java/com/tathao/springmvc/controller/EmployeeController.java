@@ -19,6 +19,7 @@ import com.tathao.springmvc.dao.BranchDAO;
 import com.tathao.springmvc.dao.EmployeeDAO;
 import com.tathao.springmvc.model.Branch;
 import com.tathao.springmvc.model.Employee;
+import com.tathao.springmvc.utils.MyAuthorities;
 
 @Controller
 public class EmployeeController {
@@ -29,10 +30,24 @@ public class EmployeeController {
 	@Autowired
 	private BranchDAO branchDAO;
 
-	@RequestMapping(value = {"/employee"} ,method = RequestMethod.GET)
-	public String getEmployeeView(ModelMap model, 
+	private static final String contextPath = "/branch/{branchId}/";
+	
+	@RequestMapping(value = { contextPath + "/employee"} ,method = RequestMethod.GET)
+	public String getEmployeeView(
+			ModelMap model,
 			@RequestParam(name="page", required = false, defaultValue = "0") 
-			int pageID) {
+			int pageID,
+			@PathVariable(name="branchId") String branchId) {
+		
+		boolean isUser = MyAuthorities.hasRole(MyAuthorities.ROLE_USER);
+		boolean isBranch = MyAuthorities.hasRole(MyAuthorities.ROLE_BRANCH);
+		boolean isCompany = MyAuthorities.hasRole(MyAuthorities.ROLE_COMPANY);
+		
+		if(isUser || isBranch) {
+//			do nothing
+		} else if(isCompany) {
+			model.addAttribute("role", "role_company");
+		}
 		
 		// limit record in each page
 		int start = 0;
@@ -40,6 +55,7 @@ public class EmployeeController {
 		if(pageID == 0) {
 			// do nothing
 		} else {
+			
 			start = (pageID - 1) * limit;
 		}
 		List<Employee> listEmployee = empDAO.getEmployeesForEachPage(start, limit);
@@ -49,7 +65,7 @@ public class EmployeeController {
 		return "employeePage";
 	}
 
-	@RequestMapping(value = "/employee", params = "action=add", method = RequestMethod.GET)
+	@RequestMapping(value = contextPath + "/employee", params = "action=add", method = RequestMethod.GET)
 	public String getAddEmployeeView(ModelMap model) {
 
 		List<Branch> listBranch = branchDAO.getAllBranchs();
@@ -62,8 +78,10 @@ public class EmployeeController {
 	}
 
 	
-	@RequestMapping(value = "/employee", params = "action=add", method = RequestMethod.POST)
-	public ModelAndView addEmployee(@Valid Employee e, BindingResult bindingResult, RedirectAttributes redirect) {
+	@RequestMapping(value = contextPath + "/employee", params = "action=add", method = RequestMethod.POST)
+	public ModelAndView addEmployee(@Valid Employee e, BindingResult bindingResult,
+			RedirectAttributes redirect,
+			@PathVariable(name="branchId") String branchId) {
 
 		ModelAndView model = new ModelAndView();
 		if (bindingResult.hasErrors()) {
@@ -89,15 +107,17 @@ public class EmployeeController {
 				
 			}
 
-			model.setViewName("redirect:/employee");
+			model.setViewName("redirect:/branch/" + branchId + "/employee");
 
 		}
 
 		return model;
 	}
 
-	@RequestMapping(value = "/employee/{idEmployee}", params = ("action=delete"))
-	public String deleteEmployee(@PathVariable(name = "idEmployee") int id, RedirectAttributes redirect) {
+	@RequestMapping(value = contextPath + "/employee/{employeeId}", params = ("action=delete"))
+	public String deleteEmployee(@PathVariable(name = "employeeId") int id, 
+			RedirectAttributes redirect,
+			@PathVariable(name="branchId") String branchId) {
 
 		boolean isDeleteSuccess = empDAO.deleteEmployee(id);
 
@@ -110,14 +130,15 @@ public class EmployeeController {
 			redirect.addFlashAttribute("msgFailure", "Xóa nhân viên thất bại!");
 			
 		}
-		return "redirect:/employee";
+		return "redirect:/branch/" + branchId + "/employee";
 
 	}
 
-	@RequestMapping(value = "/employee", params = {"action", "id"}, method = RequestMethod.GET)
+	@RequestMapping(value = contextPath + "/employee", params = {"action", "id"}, method = RequestMethod.GET)
 	public String getUpdateEmployeeView(
 			@RequestParam(name = "action") String action,
 			@RequestParam(name = "id") int id,
+			@PathVariable(name = "branchId") String branchId,
 			ModelMap model) {
 
 		if(action.equals("update")) {
@@ -134,8 +155,10 @@ public class EmployeeController {
 		return null;
 	}
 	
-	@RequestMapping(value="/employee", params="action=update", method=RequestMethod.POST)
-	public ModelAndView updateEmployee(@Valid Employee e, BindingResult result ,RedirectAttributes redirect) {
+	@RequestMapping(value= contextPath + "/employee", params="action=update", method=RequestMethod.POST)
+	public ModelAndView updateEmployee(@Valid Employee e, BindingResult result ,
+			RedirectAttributes redirect,
+			@PathVariable(name = "branchId") String branchId) {
 		
 		ModelAndView model = new ModelAndView();
 		
@@ -155,7 +178,7 @@ public class EmployeeController {
 			if(isUpdateSuccess) {
 				
 				redirect.addFlashAttribute("msgSuccess", "Cập nhật thành công");
-				model.setViewName("redirect:/employee");
+				model.setViewName("redirect:/branch/" + branchId + "/employee");
 				
 			} else {
 				

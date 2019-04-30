@@ -8,6 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><tiles:getAsString name="title" /></title>
+<link rel="icon" type="image/png" href='<spring:url value="/image/material-icon.png"></spring:url>' /> 
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
@@ -20,10 +21,16 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
-<!-- common css -->
-<link rel="stylesheet"
-	href='<spring:url value="/styles/common.css"></spring:url>' />
+<!-- font awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+<!-- common css -->
+<link rel="stylesheet" href='<spring:url value="/styles/common.css"></spring:url>' />
+
+<!-- common js -->
+<script src='<spring:url value="/js/common.js"></spring:url>'></script>
+
+	
 <script type="text/javascript">
 	$(document).ready(function() {
 
@@ -45,12 +52,13 @@
 				<tiles:insertAttribute name="menu" />
 			</div>
 			<!-- column right -->
-			<div class="col-sm-9 body-content">
-				<div class="row">
+			<div class="col-sm-9 body-wrapper">
+				<div class="header-content">
 					<tiles:insertAttribute name="header" />
 				</div>
-
-				<tiles:insertAttribute name="body" />
+				<div class="body-content">
+					<tiles:insertAttribute name="body" />
+				</div>
 			</div>
 		</div>
 	</div>

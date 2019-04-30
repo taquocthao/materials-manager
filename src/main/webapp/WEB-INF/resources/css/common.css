@@ -11,13 +11,10 @@
 	background: #f1f1f1;
 }
 
-.body-content {
+.body-wrapper {
 	height: 100%;
 }
 
-.breadcrumb {
-	border-radius: 0;
-}
 
 /* Set black background color, white text and some padding */
 .footer {

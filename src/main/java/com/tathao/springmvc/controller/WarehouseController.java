@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +18,7 @@ import com.tathao.springmvc.dao.BranchDAO;
 import com.tathao.springmvc.dao.WarehouseDAO;
 import com.tathao.springmvc.model.Branch;
 import com.tathao.springmvc.model.Warehouse;
+import com.tathao.springmvc.utils.MyAuthorities;
 
 @Controller
 public class WarehouseController {
@@ -26,9 +28,23 @@ public class WarehouseController {
 	@Autowired
 	private BranchDAO branchDAO;
 	
-	@RequestMapping(value="/warehouse", method = RequestMethod.GET)
+	private static final String contextPath = "/branch/{branchId}";
+	
+	@RequestMapping(value= contextPath + "/warehouse", method = RequestMethod.GET)
 	public String getView(ModelMap model, 
-			@RequestParam(name = "page", required = false, defaultValue = "0") int pageID) {
+			@RequestParam(name = "page", required = false, defaultValue = "0") int pageID,
+			@PathVariable(name = "branchId") String branchId) {
+		
+		boolean isUser = MyAuthorities.hasRole(MyAuthorities.ROLE_USER);
+		boolean isBranch = MyAuthorities.hasRole(MyAuthorities.ROLE_BRANCH);
+		boolean isCompany = MyAuthorities.hasRole(MyAuthorities.ROLE_COMPANY);
+		
+		if(isUser || isBranch) {
+//			do nothing
+		} else if(isCompany) {
+			model.addAttribute("role", "role_company");
+		}
+		
 		
 		int start = 0;
 		int limit = 10;
@@ -50,12 +66,13 @@ public class WarehouseController {
 		return "warehousePage";
 	}
 	
-	@RequestMapping(value="/warehouse", params= "action" ,method=RequestMethod.POST)
+	@RequestMapping(value= contextPath + "/warehouse", params= "action" ,method=RequestMethod.POST)
 	public String editWarehouse(
 			@Valid Warehouse warehouse, 
 			BindingResult result,
 			@RequestParam(name="action", required = false, defaultValue = "") String action,
 			@RequestParam(name="id", required = false, defaultValue = "") String id,
+			@PathVariable(name = "branchId") String branchId,
 			RedirectAttributes redirect) {
 		
 		if(action.equals("add")) {
@@ -76,7 +93,6 @@ public class WarehouseController {
 					redirect.addFlashAttribute("msgFailure", "Thêm thất bại");
 					
 				}
-				
 			}
 			
 		} else if(action.equals("update")) {
@@ -115,7 +131,7 @@ public class WarehouseController {
 			
 		}
 		
-		return "redirect:/warehouse";
+		return "redirect:/branch/" + branchId + "/warehouse";
 	}
 	
 	

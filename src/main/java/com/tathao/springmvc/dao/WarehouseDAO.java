@@ -10,13 +10,10 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.tathao.springmvc.mapper.WarehouseMapper;
 import com.tathao.springmvc.model.Warehouse;
 
 @Repository
-@Transactional
 public class WarehouseDAO extends JdbcDaoSupport{
 	
 	private static final String WAREHOUSE_GET_ALL = "usp_WarehouseGetAll";

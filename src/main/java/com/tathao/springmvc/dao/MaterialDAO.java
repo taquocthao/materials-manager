@@ -11,13 +11,11 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.tathao.springmvc.mapper.MaterialMapper;
 import com.tathao.springmvc.model.Material;
 
 @Repository
-@Transactional
+
 public class MaterialDAO extends JdbcDaoSupport{
 	
 	static final String MATERIALS_GET = "usp_MaterialsGetForEachPage";

@@ -10,7 +10,7 @@ import com.tathao.springmvc.model.Warehouse;
 public class WarehouseMapper implements RowMapper<Warehouse> {
 
 	public Warehouse mapRow(ResultSet rs, int rowNum) throws SQLException {
-		// TODO Auto-generated method stub
+
 		String id = rs.getString(1);
 		String name = rs.getString(2);
 		String address = rs.getString(3);
