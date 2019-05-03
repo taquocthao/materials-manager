@@ -47,6 +47,9 @@
 					<label for="password">Password:</label>
 					<input class="form-control" type="password" id="password" name="password" />
 				</div>
+				<div class="checkbox">
+					<label><input type="checkbox" name="remember-me"/> Rememeber me</label> 
+				</div>
 				
 				<div>
 					<c:choose>

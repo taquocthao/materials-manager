@@ -1,5 +1,5 @@
 
-<ul class="nav nav-pills nav-stacked">
+<ul id="list" class="nav nav-pills nav-stacked">
 	<li><a href="home"><span class="glyphicon glyphicon-dashboard"></span>
 			Home</a></li>
 	<li><a href="material"><span class="glyphicon glyphicon-tags"></span>

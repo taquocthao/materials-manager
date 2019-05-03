@@ -2,13 +2,17 @@ package com.tathao.springmvc.model;
 
 public class AppUser {
 
-	private int userId;
+	private long userId;
 	private int employeeId;
 	private String username;
 	private String password;
 	private boolean enabled;
 	
-	public AppUser(int userID, int employeeID, String username, String password, 
+	public AppUser() {
+		
+	}
+	
+	public AppUser(long userID, int employeeID, String username, String password, 
 			boolean enabled) {
 		super();
 		this.userId = userID;
@@ -18,11 +22,11 @@ public class AppUser {
 		this.enabled = enabled;
 	}
 
-	public int getUserId() {
+	public long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userID) {
+	public void setUserId(long userID) {
 		this.userId = userID;
 	}
 

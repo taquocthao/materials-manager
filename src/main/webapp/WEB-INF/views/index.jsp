@@ -34,10 +34,10 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 
-		var uri = window.location.pathname.split("/")[2];
-		
-		$("li").removeClass("active");
-		$("a[href*=" + uri + "]").parent().addClass("active");
+		var uri = window.location.pathname.split("/")[4];
+		console.log(uri);
+		$("#list li").removeClass("active");
+		$("#list a[href*=" + uri + "]").parent().addClass("active");
 
 	})
 </script>

@@ -5,16 +5,16 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 import com.tathao.springmvc.mapper.WarehouseMapper;
 import com.tathao.springmvc.model.Warehouse;
 
 @Repository
-public class WarehouseDAO extends JdbcDaoSupport{
+public class WarehouseDAO {
 	
 	private static final String WAREHOUSE_GET_ALL = "usp_WarehouseGetAll";
 	private static final String WAREHOUSE_ADD = "usp_WarehouseAdd";
@@ -23,9 +23,11 @@ public class WarehouseDAO extends JdbcDaoSupport{
 	
 	private DataSource dataSource;
 	
+	@Autowired
 	public WarehouseDAO(DataSource dataSource) {
-		this.setDataSource(dataSource);
+//		this.setDataSource(dataSource);
 		this.dataSource = dataSource;
+		System.out.println("WarehouseDAO::contructor() -> using "+ dataSource);
 	}
 	
 	@SuppressWarnings("unchecked")

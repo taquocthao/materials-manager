@@ -1,4 +1,4 @@
-package com.tathao.springmvc.config;
+package com.tathao.springmvc.service;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -23,6 +23,8 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
 		
+		System.out.println("onAuthenticationSuccess()");
+		
 		handle(request, response, authentication);
 		clearAuthenticationAttributes(request);
 	}
@@ -31,7 +33,7 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
 			Authentication authentication) throws IOException {
 		
 		String targetUrl = determineTargetUrl(authentication, request);
-		
+		System.out.println("target url: " + targetUrl);
 		redirectStrategy.sendRedirect(request, response, targetUrl);
 		
 	}

@@ -9,16 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 import com.tathao.springmvc.mapper.EmployeeMapper;
 import com.tathao.springmvc.model.Employee;
 
-
-
 @Repository
-
-public class EmployeeDAO extends JdbcDaoSupport{
+public class EmployeeDAO{
 	
 	static final String GET_ALL_EMPLOYEES = "usp_EmployeesGetAll";
 	static final String GET_EMPLOYEES = "usp_EmployeeGetForEachPage";
@@ -31,16 +27,15 @@ public class EmployeeDAO extends JdbcDaoSupport{
 	
 	@Autowired
 	public EmployeeDAO(DataSource dataSource) {
-		this.setDataSource(dataSource);
 		this.dataSource = dataSource;
-		System.out.println("EmployeeDAO::Contructor() -> using DataSource: " + dataSource);
+		System.out.println("EmployeeDAO::Contructor() -> using DataSource: " + this.dataSource);
 	}
 	
 	public Employee getEmployeeById(int id) {
 		
 		SimpleJdbcCall simpleCall = new SimpleJdbcCall(this.dataSource)
-				.withProcedureName(GET_EMPLOYEE_BY_ID);
-//		
+				.withProcedureName(GET_EMPLOYEE_BY_ID);	
+		
 		SqlParameterSource in = new MapSqlParameterSource().addValue("MANV", id);
 		
 		Map<String, Object> out = simpleCall.execute(in);

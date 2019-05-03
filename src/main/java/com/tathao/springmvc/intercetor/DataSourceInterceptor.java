@@ -15,24 +15,20 @@ public class DataSourceInterceptor implements HandlerInterceptor {
 		String contextPath = request.getServletContext().getContextPath();
 		
 		//branch 1
-		String prefixBranch1 = contextPath + "/branch/1";
+		String prefixBranch1 = contextPath + "/branch/1/";
 		
 		//branch 2
-		String prefixBranch2 = contextPath + "/branch/2";
+		String prefixBranch2 = contextPath + "/branch/2/";
 		
-		// root
-		String prefixBranch = contextPath;
+//		root
+//		String prefixBranch = contextPath + "/company/";
 		
 		String uri = request.getRequestURI();
 		
 		System.out.println("DataSourceInterceptor");
 		System.out.println("URI: " + uri);
 		
-		if(uri.startsWith(prefixBranch)) {
-			
-			request.setAttribute("keyDS", "SERVER_ROOT");
-			
-		} else if(uri.startsWith(prefixBranch1)) {
+		if(uri.startsWith(prefixBranch1)) {
 			
 			request.setAttribute("keyDS", "SERVER_1");
 			

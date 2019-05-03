@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
 import org.springframework.web.WebApplicationInitializer;
+import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.DispatcherServlet;
@@ -23,6 +24,9 @@ public class SpringWebAppInitialzer implements WebApplicationInitializer {
 				servletContext.addServlet("dispatcher", new DispatcherServlet(appContext));
 		dispatcher.setLoadOnStartup(1);
 		dispatcher.addMapping("/");
+		
+		dispatcher.setInitParameter("contextClass", appContext.getClass().getName());
+		servletContext.addListener(new ContextLoaderListener(appContext));
 		
 		System.out.println("SpringWebAppInitialzer:: onStartup():dispatcher");
 		

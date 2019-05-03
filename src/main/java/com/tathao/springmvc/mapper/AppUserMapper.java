@@ -12,13 +12,13 @@ public class AppUserMapper implements RowMapper<AppUser> {
 	@Override
 	public AppUser mapRow(ResultSet rs, int rowNum) throws SQLException {
 		
-		int userId = rs.getInt(1);
-//		int employeeId = rs.getInt(2);
-		String username = rs.getString(2);
-		String password = rs.getString(3);
-		boolean isEnable = rs.getBoolean(4);
+		long userId = rs.getInt(1);
+		int employeeId = rs.getInt(2);
+		String username = rs.getString(3);
+		String password = rs.getString(4);
+		boolean isEnable = rs.getBoolean(5);
 		
-		return new AppUser(userId, 1 ,username, password, isEnable);
+		return new AppUser(userId, employeeId ,username, password, isEnable);
 	}
 
 }
