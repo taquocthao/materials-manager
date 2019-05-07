@@ -5,7 +5,6 @@ package com.tathao.springmvc.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -17,21 +16,20 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.tathao.springmvc.service.CustomUserDetailsAuthenticationProvider;
-import com.tathao.springmvc.service.MyAuthenticationFailureHandler;
-import com.tathao.springmvc.service.MySimpleUrlAuthenticationSuccessHandler;
-import com.tathao.springmvc.service.SimpleAuthenticationFilter;
-import com.tathao.springmvc.service.UserDetailsServiceImpl;
+import com.tathao.springmvc.security.MyAuthenticationFailureHandler;
+import com.tathao.springmvc.security.MyAuthenticationFilter;
+import com.tathao.springmvc.security.MyAuthenticationSuccessHandler;
+import com.tathao.springmvc.security.MyUserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	private UserDetailsServiceImpl userDetailsService;
+	private MyUserDetailsServiceImpl userDetailsService;
 
 //	@Autowired
-//	private CustomUserDetailsAuthenticationProvider authProvider;
+//	private MyUserDetailsAuthenticationProvider authProvider;
 	
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
@@ -40,11 +38,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 	@Bean
-	public SimpleAuthenticationFilter authenticationFilter() throws Exception {
+	public MyAuthenticationFilter authenticationFilter() throws Exception {
 		
 		System.out.println("AuthenticationFilter:::");
 		
-		SimpleAuthenticationFilter filter = new SimpleAuthenticationFilter();
+		MyAuthenticationFilter filter = new MyAuthenticationFilter();
 		filter.setAuthenticationSuccessHandler(myAuthenticationSuccessHandler());
 		filter.setAuthenticationManager(authenticationManagerBean());
 		filter.setAuthenticationFailureHandler(myAuthenticationFailureHandler());
@@ -67,7 +65,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public AuthenticationSuccessHandler myAuthenticationSuccessHandler() {
 		
 		System.out.println("BEAN:: AuthenticationSuccessHandler");
-		return new MySimpleUrlAuthenticationSuccessHandler();
+		return new MyAuthenticationSuccessHandler();
 		
 	}
 	
@@ -84,9 +82,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //		auth.userDetailsService(userDetailsService)
 //			.passwordEncoder(passwordEncoder());
 		
-		auth.authenticationProvider(authenticationProvider());
-		
 //		auth.authenticationProvider(authProvider);
+		
+		auth.authenticationProvider(authenticationProvider());
 	}
 
 	

@@ -1,7 +1,14 @@
 package com.tathao.springmvc.model;
 
-public class AppUser {
+import java.io.Serializable;
 
+public class AppUser implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private long userId;
 	private int employeeId;
 	private String username;

@@ -13,13 +13,13 @@ import org.springframework.stereotype.Repository;
 import com.tathao.springmvc.model.AppUser;
 
 
-@Repository("appUserDAO1")
-public class AppUserDAO {
+@Repository("appUserDAO2")
+public class AppUserDAO2 {
 
 	private static final String FIND_ACCOUNT_BY_USERNAME = "findAccountByUsername";
 
 	@Autowired
-	@Qualifier("dataSource1")
+	@Qualifier("dataSource2")
 	private DataSource dataSource;
 
 	

@@ -15,13 +15,13 @@ import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 
 
-@Repository("appRoleDAO1")
-public class AppRoleDAO{
+@Repository("appRoleDAO2")
+public class AppRoleDAO2{
 
 	private static final String GET_ROLE_NAME = "getRoleNames";
 
 	@Autowired
-	@Qualifier("dataSource1")
+	@Qualifier("dataSource2")
 	private DataSource dataSource;
 	
 	

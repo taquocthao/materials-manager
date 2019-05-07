@@ -6,7 +6,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.tathao.springmvc.intercetor.DataSourceInterceptor;
+import com.tathao.springmvc.interceptor.DataSourceInterceptor;
 
 @Configuration
 @EnableWebMvc

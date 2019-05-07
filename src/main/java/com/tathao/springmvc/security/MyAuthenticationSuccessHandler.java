@@ -1,4 +1,4 @@
-package com.tathao.springmvc.service;
+package com.tathao.springmvc.security;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -15,7 +15,7 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 	

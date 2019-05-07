@@ -1,4 +1,4 @@
-package com.tathao.springmvc.intercetor;
+package com.tathao.springmvc.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,6 +35,22 @@ public class DataSourceInterceptor implements HandlerInterceptor {
 		} else if(uri.startsWith(prefixBranch2)) {
 			
 			request.setAttribute("keyDS", "SERVER_2");
+		} else {
+			
+			try {
+				
+				String keyDS = request.getAttribute("keyDS").toString();
+				if(!keyDS.equals("") || !keyDS.isEmpty()) {
+					System.out.println("DataSourceInterceptor:: keyDS" + keyDS);
+					request.setAttribute("KeyDS", keyDS );
+				}
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println("");
+			}
+			
+			
 		}
 			
 		return true;

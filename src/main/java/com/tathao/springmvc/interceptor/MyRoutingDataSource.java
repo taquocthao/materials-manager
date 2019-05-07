@@ -1,4 +1,4 @@
-package com.tathao.springmvc.routing;
+package com.tathao.springmvc.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,7 +14,7 @@ public class MyRoutingDataSource extends AbstractRoutingDataSource {
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
 				.getRequestAttributes())
 	            .getRequest();
-		String keyDS = (String)request	.getAttribute("keyDS");
+		String keyDS = (String)request.getAttribute("keyDS");
 		
 		System.out.println("MyRoutingDataSource::determineCurrentLookupKey");
 		System.out.println(keyDS);

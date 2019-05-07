@@ -1,4 +1,4 @@
-package com.tathao.springmvc.service;
+package com.tathao.springmvc.security;
 
 import java.util.Collection;
 
