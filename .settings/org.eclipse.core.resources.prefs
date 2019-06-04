@@ -3,4 +3,5 @@ encoding//src/main/java=UTF-8
 encoding//src/main/java/com/tathao/springmvc/controller/EmployeeController.java=UTF-8
 encoding//src/main/java/com/tathao/springmvc/dao/EmployeeDAO.java=UTF-8
 encoding//src/main/resources=UTF-8
+encoding//src/main/webapp/WEB-INF/views/bodyfragments/homepage.jsp=UTF-8
 encoding/<project>=UTF-8

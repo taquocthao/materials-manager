@@ -1,0 +1,35 @@
+USE QLVT
+GO
+
+ALTER PROC findAccountByUsername
+(
+	@USER_NAME_IN varchar(36),
+	@MACN char(10),
+	@USER_ID BIGINT OUT,
+	@MANV int OUT,
+	@USER_NAME varchar(36) OUT,
+	@PASSWORD varchar(128) OUT,
+	@ENABLED BIT OUT
+)
+AS
+BEGIN
+	SELECT @USER_ID = au.USER_ID, @MANV = au.MANV, @USER_NAME = au.USER_NAME, 
+		@PASSWORD = au.ENCRYTED_PASSWORD, @ENABLED = au.ENABLED 
+	FROM APP_USER au, NhanVien nv
+	WHERE au.MANV = nv.MANV and au.USER_NAME=@USER_NAME_IN and nv.MACN=@MACN
+END
+
+--EXEC findAccountByUsername 'TaThao', 'CN1'
+
+CREATE PROC getRoleNames
+	@USER_ID BIGINT,
+	@ROLE_NAME varchar(30) OUT
+AS
+BEGIN
+	SELECT @ROLE_NAME = ar.ROLE_NAME
+	FROM APP_ROLE ar, USER_ROLE ur
+	WHERE ar.ROLE_ID = ur.ROLE_ID and ur.USER_ID=@USER_ID
+END
+GO
+
+EXEC getRoleNames 1

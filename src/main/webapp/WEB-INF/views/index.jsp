@@ -28,14 +28,12 @@
 <link rel="stylesheet" href='<spring:url value="/styles/common.css"></spring:url>' />
 
 <!-- common js -->
-<script src='<spring:url value="/js/common.js"></spring:url>'></script>
 
 	
 <script type="text/javascript">
 	$(document).ready(function() {
 
 		var uri = window.location.pathname.split("/")[4];
-		console.log(uri);
 		$("#list li").removeClass("active");
 		$("#list a[href*=" + uri + "]").parent().addClass("active");
 

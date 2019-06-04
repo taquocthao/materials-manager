@@ -19,7 +19,7 @@ public class AppUserDAO2 {
 	private static final String FIND_ACCOUNT_BY_USERNAME = "findAccountByUsername";
 
 	@Autowired
-	@Qualifier("dataSource2")
+	@Qualifier("dataSource3")
 	private DataSource dataSource;
 
 	

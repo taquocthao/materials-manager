@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function(){
 	
 //	global variable
 	var employeeId;
@@ -11,6 +11,7 @@ $(document).ready(function() {
 //	then hide add, delete, update button
 //	because company read only data
 	if(role === "role_company"){
+	
 		$("#btnAdd").hide();
 		$(".btn-delete").attr("disabled", true);
 		$(".btn-update").attr("disabled", true);

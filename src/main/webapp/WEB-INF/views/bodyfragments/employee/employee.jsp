@@ -10,12 +10,13 @@
 <script src='<spring:url value="/js/employee.js"></spring:url>'></script>
 
 
-<div id="role" class="hidden"> ${role } </div>
+<div id="role" class="hidden">${role }</div>
+
 <!-- button Add -->
-<div style="margin-bottom: 30px">
-	<a id="btnAdd" class="btn btn-success" href="employee?action=add"> Add employee
-	</a>
+<div style="margin-bottom: 30px" >
+	<a id="btnAdd" class="btn btn-success" href="employee?action=add"> Add employee </a>
 </div>
+<!--  -->
 
 <div class="alert alert-success" id="divSuccess"
 	style="text-align: center;">

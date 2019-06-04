@@ -42,11 +42,12 @@ public class EmployeeController {
 		boolean isUser = MyAuthorities.hasRole(MyAuthorities.ROLE_USER);
 		boolean isBranch = MyAuthorities.hasRole(MyAuthorities.ROLE_BRANCH);
 		boolean isCompany = MyAuthorities.hasRole(MyAuthorities.ROLE_COMPANY);
-		
+	
 		if(isUser || isBranch) {
 //			do nothing
 		} else if(isCompany) {
 			model.addAttribute("role", "role_company");
+			System.out.println("ROLE: COMPANY");
 		}
 		
 		// limit record in each page

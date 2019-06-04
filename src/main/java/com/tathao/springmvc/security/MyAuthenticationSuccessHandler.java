@@ -71,7 +71,8 @@ public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHand
 		if(isUser) {
 			return contextPath;
 		} else if(isCongTy) {
-			return "/company/home";
+//			return "/company/home";
+			return contextPath;
 		} else if(isChiNhanh) {
 			return contextPath;
 		} else {		

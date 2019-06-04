@@ -5,5 +5,15 @@
  <web-app>
 
 	<display-name>SpringMVCJdbcTransaction Web Application</display-name>
+	<servlet>
+		<servlet-name>HomeServlet</servlet-name>
+		<display-name>HomeServlet</display-name>
+		<description></description>
+		<servlet-class>com.tathao.servlet.HomeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>HomeServlet</servlet-name>
+		<url-pattern>/home</url-pattern>
+	</servlet-mapping>
 
 </web-app>

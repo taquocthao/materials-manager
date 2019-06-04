@@ -10,7 +10,7 @@
 
 
 
-<div id="role" class="hiden">${role }</div>
+<div id="role" class="hidden">${role }</div>
 
 <!-- button add -->
 <div style="margin-bottom: 30px">
@@ -123,9 +123,9 @@
 					<td>${ warehouse.address }</td>
 					<td>${ warehouse.branch_id }</td>
 					<td>
-						<button class="btn btn-danger" id="btnDelete"
+						<button class="btn btn-danger btn-delete" id="btnDelete"
 							value="${ warehouse.id }">Delete</button> |
-						<button class="btn btn-primary" id="btnUpdate"
+						<button class="btn btn-primary btn-update" id="btnUpdate"
 							value="${ warehouse.id }">Update</button>
 					</td>
 				</tr>

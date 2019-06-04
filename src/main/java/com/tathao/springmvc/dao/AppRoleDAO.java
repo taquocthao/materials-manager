@@ -21,7 +21,7 @@ public class AppRoleDAO{
 	private static final String GET_ROLE_NAME = "getRoleNames";
 
 	@Autowired
-	@Qualifier("dataSource1")
+	@Qualifier("dataSource2")
 	private DataSource dataSource;
 	
 	
